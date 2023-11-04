@@ -12,14 +12,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("employers")
+@RequestMapping(value = "employers")
 public class EmployerController {
 
     @Autowired
     private EmployerRepository employerRepository;
 
-    //Task 2 Controller number 2...add an index method that
-    //responds at /employers with a list??
     @GetMapping("")
     public String index(Model model) {
 
