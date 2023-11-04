@@ -4,18 +4,16 @@ package org.launchcode.techjobs.persistent.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 import java.util.List;
 
 @Entity
-public class Job {
-
-    @Id
-    @GeneratedValue
-    private int id;
+public class Job extends AbstractEntity{
 
     private String name;
-    private String employer;
+    @ManyToOne
+    private Employer employer;
     private String skills;
 
 
@@ -23,9 +21,9 @@ public class Job {
     }
 
     // Initialize the id and value fields.
-    public Job(String anEmployer, String someSkills) {
-        super();
-        this.employer = anEmployer;
+    //Is there a reason I do not have name in here? Where is the constructor for the name? I need it?
+    public Job(Employer employer, String someSkills) {
+        this.employer = employer;
         this.skills = someSkills;
     }
 
@@ -39,11 +37,11 @@ public class Job {
         this.name = name;
     }
 
-    public String getEmployer() {
+    public Employer getEmployer() {
         return employer;
     }
 
-    public void setEmployer(String employer) {
+    public void setEmployer(Employer employer) {
         this.employer = employer;
     }
 
