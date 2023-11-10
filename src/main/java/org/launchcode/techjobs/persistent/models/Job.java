@@ -11,7 +11,6 @@ import java.util.List;
 @Entity
 public class Job extends AbstractEntity{
 
-    private String name;
     @ManyToOne
     private Employer employer;
     private String skills;
@@ -21,22 +20,12 @@ public class Job extends AbstractEntity{
     }
 
     // Initialize the id and value fields.
-    //Is there a reason I do not have name in here? Where is the constructor for the name? I need it?
     public Job(Employer employer, String someSkills) {
         this.employer = employer;
         this.skills = someSkills;
     }
 
     // Getters and setters.
-    
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Employer getEmployer() {
         return employer;
     }
