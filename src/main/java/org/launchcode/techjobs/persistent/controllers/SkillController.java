@@ -1,6 +1,7 @@
 package org.launchcode.techjobs.persistent.controllers;
 
 import jakarta.validation.Valid;
+import org.launchcode.techjobs.persistent.models.Job;
 import org.launchcode.techjobs.persistent.models.Skill;
 import org.launchcode.techjobs.persistent.models.data.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class SkillController {
 
     @GetMapping("")
     public String index(Model model) {
+        model.addAttribute("skills", skillRepository.findAll());
         return "skills/index";
     }
 
@@ -33,11 +35,12 @@ public class SkillController {
     public String processAddSkillForm(@ModelAttribute @Valid Skill newSkill,
                                       Errors errors, Model model) {
         if(errors.hasErrors()) {
+            model.addAttribute("skills", skillRepository.findAll());
             return "skills/add";
         }
 
         skillRepository.save(newSkill);
-        return "redirect:";
+        return "redirect:/skills";
     }
 
     @GetMapping("view/{skill}")

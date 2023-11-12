@@ -35,11 +35,12 @@ public class EmployerController {
                                     Errors errors, Model model) {
 
         if (errors.hasErrors()) {
+            model.addAttribute("employers", employerRepository.findAll());
             return "employers/add";
         }
 
         employerRepository.save(newEmployer);
-        return "redirect:";
+        return "redirect:/employers";
     }
 
     @GetMapping("view/{employerId}")
