@@ -8,6 +8,7 @@ import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
 import org.launchcode.techjobs.persistent.models.data.JobRepository;
 import org.launchcode.techjobs.persistent.models.data.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -22,6 +23,7 @@ import java.util.Optional;
  */
 @Controller
 public class HomeController {
+//    private CrudRepository crudRepository;
 
     @Autowired
     private EmployerRepository employerRepository;
@@ -36,6 +38,7 @@ public class HomeController {
     public String index(Model model) {
 
         model.addAttribute("title", "MyJobs");
+        model.addAttribute("jobs", jobRepository.findAll());
         return "index";
     }
 
@@ -79,7 +82,10 @@ public class HomeController {
     @GetMapping("view/{jobId}")
     public String displayViewJob(Model model, @PathVariable int jobId) {
 
-            return "view";
+        Optional<Job> result = jobRepository.findById(jobId);
+        Job job = result.get();
+        model.addAttribute("job", job);
+        return "view";
     }
 
 }
